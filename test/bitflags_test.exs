@@ -63,4 +63,12 @@ defmodule BitFlagsTest do
   def dynamic(_, _) do
     :nope
   end
+
+  test "usage of property call form" do
+    flags = 0
+    refute letter(flags.c)
+
+    flags_with_c = letter(flags, :c, true)
+    assert letter(flags_with_c.c)
+  end
 end
