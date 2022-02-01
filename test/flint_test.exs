@@ -1,9 +1,9 @@
-defmodule BitFlagsTest do
+defmodule FlintTest do
   use ExUnit.Case
-  require BitFlags
+  require Flint
 
   @letters :lists.reverse([:e, :d, :c, :b, :a])
-  BitFlags.defflags(:letter, @letters)
+  Flint.defflags(:letter, @letters)
 
   test "create a predictible flag function" do
     @letters |> Enum.map(fn key -> refute letter(0, key) end)

@@ -1,9 +1,9 @@
-defmodule BitFlags.TestSample do
+defmodule Flint.TestSample do
   @moduledoc false
 
-  require BitFlags
+  require Flint
 
-  BitFlags.defflags(:sample, ~w(one two four eight)a)
+  Flint.defflags(:sample, ~w(one two four eight)a)
 
   def dynamic(flags, key) when is_sample(flags, key) do
     :yep

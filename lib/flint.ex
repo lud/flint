@@ -1,4 +1,4 @@
-defmodule BitFlags do
+defmodule Flint do
   defp raise_invalid(message) do
     raise ArgumentError, message
   end
@@ -54,7 +54,7 @@ defmodule BitFlags do
 
   defmacro defflags(name, flagnames) when is_atom(name) do
     quote bind_quoted: binding(), generated: true, location: :keep do
-      :ok = BitFlags.check_list_of_atoms(flagnames)
+      :ok = Flint.check_list_of_atoms(flagnames)
 
       kpow =
         flagnames
@@ -75,14 +75,14 @@ defmodule BitFlags do
 
       defmacro unquote(name)({{:., _, [{flags_name, _, _} = flags, key]}, _, _} = code)
                when is_atom(key) do
-        BitFlags.raise_invalid_key(unquote(name), key, code)
+        Flint.raise_invalid_key(unquote(name), key, code)
       end
 
       defmacro unquote(name)(code) do
         if Macro.Env.in_guard?(__CALLER__) do
-          BitFlags.raise_invalid_guard(unquote(name), code)
+          Flint.raise_invalid_guard(unquote(name), code)
         else
-          BitFlags.raise_invalid_call(unquote(name), code)
+          Flint.raise_invalid_call(unquote(name), code)
         end
       end
 
